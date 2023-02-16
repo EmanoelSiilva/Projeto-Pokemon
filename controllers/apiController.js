@@ -6,24 +6,22 @@ exports.test = (req, res) => {
 }
 
 exports.details = (req, res) => {
-    res.send({ type: 'GET' })
+    exports.details = function (req, res) {
+        PI.find({}).then(function(pi){
+        res.send(pi);
+        });
+     };
 }
 
 exports.add = (req, res, next) => {
-    db.create(req.body).then((pi) => {
-        res.send(pi)
-    }).catch(next)
-    
-    res.send({ 
-        type: 'POST',
-        nome: req.body.nome,
-        tipo: req.body.tipo
-    })
+    PI.create(req.body).then(function(pi){
+        res.send(pi);
+      }).catch(next);
 }
 
 exports.update = (req, res, next) => {
     PI.findByIdAndUpdate({ _id: req.params.id}, req.body).then(() =>{
-        PI.findOne({ _id: req.params.id }).then((ip) => {
+        PI.findOne({ _id: req.params.id }).then((pi) => {
             res.send(pi)
         })
     }).catch(next)
