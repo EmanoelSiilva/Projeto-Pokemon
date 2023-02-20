@@ -30,4 +30,15 @@ exports.delete = function (req, res, next) {
     PI.findByIdAndRemove({_id: req.params.id}).then(function(pi){
       res.send(pi);
     }).catch(next);
-  };
+};
+
+exports.getPokemon = ((req, res) => {
+    PI.aggregate([{ $sample: { size: 1 } }], (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Erro ao descobri o pokemon');
+      } else {
+        res.json(result[0]);
+      }
+    });
+});

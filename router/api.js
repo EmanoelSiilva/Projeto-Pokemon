@@ -8,4 +8,5 @@ router.get('/', apiController.details)
 router.post('/add', apiController.add)
 router.delete('/:id', apiController.delete)
 router.patch('/:id', apiController.update)
+router.get('/pokemon', apiController.getPokemon)
 module.exports = router
