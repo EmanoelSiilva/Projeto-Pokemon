@@ -6,11 +6,9 @@ exports.test = (req, res) => {
 }
 
 exports.details = (req, res) => {
-    exports.details = function (req, res) {
-        PI.find({}).then(function(pi){
+    PI.find({}).then(function(pi){
         res.send(pi);
-        });
-     };
+    });
 }
 
 exports.add = (req, res, next) => {
